@@ -3,13 +3,37 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-{{ cookiecutter.project_name }} Documentation
-{{ '=' * (cookiecutter.project_name|length + ' Documentation'|length) }}
+{{ cookiecutter.project_name }} |version|
+{{ '=' * (cookiecutter.project_name|length + 30) }}
 
 .. toctree::
    :maxdepth: 2
+   :caption: Getting Started
+   
+   Philosophy <philosophy>
+   Installation <installation>
+   Examples <examples>
 
-   installation
-   usage
-   release-history
-   min_versions
+.. toctree::
+  :maxdepth: 2
+  :caption: User Guide
+
+   More details on how to use the package <usage>
+
+.. toctree::
+  :maxdepth: 1
+  :caption: Code reference
+
+   Modules <api/index>
+
+.. toctree::
+  :maxdepth: 1
+  :caption: Release history
+
+   Release History <release-history>
+
+.. toctree::
+  :maxdepth: 1
+  :caption: Developer
+
+  Contributing to {{ cookiecutter.project_name }} <contributing>

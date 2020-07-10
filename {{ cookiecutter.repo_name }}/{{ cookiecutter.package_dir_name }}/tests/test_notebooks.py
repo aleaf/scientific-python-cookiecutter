@@ -4,8 +4,16 @@ import os
 import pytest
 
 
+@pytest.fixture(scope="session")
+def project_root_path():
+    """Relative path to the root level of the project.
+    """
+    filepath = os.path.split(os.path.abspath(__file__))[0]
+    return os.path.normpath(os.path.join(filepath, '../../'))
+
+
 def included_notebooks():
-    include = ['examples']
+    include = ['examples']  # folders relative to project_root_path
     files = []
     for folder in include:
         files += glob.glob(os.path.join(folder, '*.ipynb'))
@@ -39,7 +47,7 @@ def kernel_name():
                    reason="jupyter kernel has timeout issue on appveyor for some reason")
 def test_notebook(notebook, kernel_name, tmpdir, project_root_path):
     # run autotest on each notebook
-    notebook = os.path.join(project_root_path, notebook)
+    notebook = os.path.join(project_root_path, notebook).replace(' ', '\ ')
     path, fname = os.path.split(notebook)
 
     # save the rendered notebook to the documentation folder
@@ -47,6 +55,7 @@ def test_notebook(notebook, kernel_name, tmpdir, project_root_path):
     # the docs get built when the tests are run on travis
     # so successful execution of this test will build the notebooks for the docs
     output_folder = os.path.join(project_root_path, 'docs/source/notebooks')
+    print(output_folder)
 
     cmd = ('jupyter ' + 'nbconvert '
            '--ExecutePreprocessor.timeout=600 '
