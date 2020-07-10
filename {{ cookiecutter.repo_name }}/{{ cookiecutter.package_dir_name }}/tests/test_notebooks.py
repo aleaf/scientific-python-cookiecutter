@@ -14,6 +14,11 @@ def project_root_path():
 
 def included_notebooks():
     include = ['examples']  # folders relative to project_root_path
+    # explicitly set paths relative to project_root_path
+    # (in case test is called from somewhere else)
+    filepath = os.path.split(os.path.abspath(__file__))[0]
+    project_root_path = os.path.normpath(os.path.join(filepath, '../../'))
+    include = [os.path.join(project_root_path, folder) for folder in include]
     files = []
     for folder in include:
         files += glob.glob(os.path.join(folder, '*.ipynb'))
@@ -55,7 +60,7 @@ def test_notebook(notebook, kernel_name, tmpdir, project_root_path):
     # the docs get built when the tests are run on travis
     # so successful execution of this test will build the notebooks for the docs
     output_folder = os.path.join(project_root_path, 'docs/source/notebooks')
-    print(output_folder)
+    print('saving {} to {}'.format(fname, output_folder))
 
     cmd = ('jupyter ' + 'nbconvert '
            '--ExecutePreprocessor.timeout=600 '
