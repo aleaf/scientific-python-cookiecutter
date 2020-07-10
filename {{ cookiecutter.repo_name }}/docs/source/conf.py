@@ -33,6 +33,7 @@
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosectionlabel',
     'sphinx.ext.autosummary',
     'sphinx.ext.githubpages',
     'sphinx.ext.intersphinx',
@@ -132,6 +133,12 @@ html_sidebars = {
     ]
 }
 
+# If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
+html_show_copyright = False
+
+# If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+# using the given strftime format.
+html_last_updated_fmt = '%b %d, %Y'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
