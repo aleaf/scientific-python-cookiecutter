@@ -80,3 +80,11 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# GIS
+*.aux.xml
+*.qpj
+*.cpg
+
+# flopy
+*.chk
